@@ -5,8 +5,6 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 import {LoginService} from "../../services/login/login.service";
-// import {EnterpriseService} from "../../services/enterprise/enterprise.service";
-// import {LoginService} from "../../services/login/login.service";
 
 @Component({
   selector: 'app-mainEnterprise',
