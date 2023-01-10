@@ -1,4 +1,3 @@
-// Đức
 import {Roles} from "./Roles";
 
 export class AppUser{
