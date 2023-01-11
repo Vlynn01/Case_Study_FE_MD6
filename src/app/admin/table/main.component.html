@@ -412,6 +412,8 @@
                   <div class="pv-lg"><img class="center-block img-responsive img-circle img-thumbnail thumb96"
                                           src="{{enterpriseDeltail?.imgEnterprise}}}" alt="Contact"></div>
                   <h3 class="m0 text-bold">{{enterpriseDeltail?.nameEnterprise}}</h3>
+
+                  <!-- xác thực gửi mail-->
                   <div class="mv-lg">
                     <p>Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have
                       fun!</p>
@@ -528,7 +530,7 @@
                                         (click)="refuseInput()">Từ chối
                                 </button>
                                 <button class="btn btn-info" id="confirm" type="button"
-                                        data-dismiss="modal"      (click)="confirm(enterpriseDeltail.idEnterprise)">Xác thực
+                                        data-dismiss="modal" (click)="confirm(enterpriseDeltail.idEnterprise)">Xác thực
                                 </button>
                               </div>
                             </div>
@@ -562,13 +564,14 @@
           <div class="modal-body">
 
             <div class="form-group">
-            <textarea style="height: 150px;;" type="text" class="form-control"  value=""
+            <textarea style="height: 150px;;" type="text" class="form-control" value=""
                       placeholder="Nhập lý do khóa tài khoản">
             </textarea>
             </div>
             <div>
               <!--            (click)=""-->
-              <span type="submit" (click)=" confirmBan()" data-toggle="modal" data-target="#banEnterprise"  class=" btn btn-default btn btn-info add-new">Xác nhận</span>
+              <span type="submit" (click)=" confirmBan()" data-toggle="modal" data-target="#banEnterprise"
+                    class=" btn btn-default btn btn-info add-new">Xác nhận</span>
             </div>
 
           </div>
@@ -651,12 +654,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group" >
+          <div class="form-group">
             Bạn muốn mở khóa cho doanh nghiệp này?
           </div>
           <div>
             <!--            (click)=""-->
-            <span type="submit" (click)="confirmUnBan()" data-toggle="modal" data-target="#unbanEnterprise"  class=" btn btn-default btn btn-info add-new">Xác nhận</span>
+            <span type="submit" (click)="confirmUnBan()" data-toggle="modal" data-target="#unbanEnterprise"
+                  class=" btn btn-default btn btn-info add-new">Xác nhận</span>
           </div>
         </div>
       </div>
@@ -685,18 +689,20 @@
   </div>
   <div class="modalConfirm" id="modalConfirmRegister" style="display: none">
     <div class="modal__layout"></div>
-<!--    <div class="modal__body">-->
-      <div id="loader" >
-      </div>
-      <div  style="display: block;margin-top: 26%;position: relative;right: 20px" id="myDiv" class="animate-bottom">
-        <h4 style="color: red">Vui lòng chờ !</h4>
-        <p style="color: black;">Đang thực hiện yêu cầu xác nhận !</p>
-      </div>
+    <!--    <div class="modal__body">-->
+    <div id="loader">
     </div>
-<!--  </div>-->
+    <div style="display: block;margin-top: 26%;position: relative;right: 20px" id="myDiv" class="animate-bottom">
+      <h4 style="color: red">Vui lòng chờ !</h4>
+      <p style="color: black;">Đang thực hiện yêu cầu xác nhận !</p>
+    </div>
+  </div>
+  <!--  </div>-->
 
   <!--End Modal content Mở DN-->
 </main>
+
+
 
 
 <!--   Core JS Files   -->

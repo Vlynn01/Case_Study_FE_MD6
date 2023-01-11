@@ -85,6 +85,8 @@ export class EnterpriseRegisterComponent implements OnInit {
            idField: filed.idField
          }
        }
+
+       //Form đăng ký
       this.loginService.register(filedNew).subscribe(() =>{
          this.funcionAleartRegisterSuccess();
         this.registerForm = new FormGroup({
