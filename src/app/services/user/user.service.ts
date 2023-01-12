@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PostEnterprise} from "../../model/PostEnterprise";
+import {FormJob} from "../../model/FormJob";
+import {Enterprise} from "../../model/Enterprise";
+import {AppUser} from "../../model/AppUser";
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +43,14 @@ export class UserService {
   }
   findImgCvApply(idUser:number,idPost:number):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/user/findImgCvApply/${idUser}/${idPost}`)
+  }
+
+  findByFieldAndFormJob(FieldAndFormJob:any):Observable<any>{
+    return this.http.post<any>(`http://localhost:8080/user/findByFieldAndFormJob`, FieldAndFormJob)
+  }
+
+  // http://localhost:8080/user/find-everything?abc=xxx&xyz=xxx
+  findEverything(param_str:string):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/user/find-everything` + param_str)
   }
 }

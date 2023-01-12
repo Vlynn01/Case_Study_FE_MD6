@@ -6004,7 +6004,7 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="form_name1">Vị trí ứng tuyển </label>
-                            <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                            <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập vị trí ứng tuyển" required="required" data-error="Firstname is required.">
                           </div>
                           <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
@@ -6039,7 +6039,7 @@ License: For each use you must have a valid license purchased only from above li
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="form_need1">Chọn gói</label>
+                            <label for="form_need1">Chế độ lam việc</label>
                             <select id="form_need1" name="need" formControlName="idRegime" class="form-control" required="required" data-error="Vip-thường">
                               <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
                             </select>

@@ -3,7 +3,10 @@
 <link rel="stylesheet" href="/assets/user/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="/assets/user/css/jasny-bootstrap.min.css" type="text/css">
 <!--<link rel="stylesheet" href="/assets/user/bootstrap-select.min.css" type="text/css">-->
-<!-- Material CSS --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Material CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 <!-- Font Awesome CSS -->
 <link rel="stylesheet" href="/assets/user/fonts/font-awesome.min.css" type="text/css">
@@ -243,20 +246,34 @@
             <div class="content">
               <form [formGroup]="searchForm" (ngSubmit)="search()">
                 <div class="row">
-                  <div class="col-md-4 col-sm-6">
+                  <div class="col-md-2.1 col-sm-6">
                     <div class="form-group">
                       <input class="form-control" formControlName="nameEnterprise" type="text"
                              placeholder="Tên công việc">
                       <i class="ti-time"></i>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-6">
+                  <div class="col-md-2.1 col-sm-6">
                     <div class="form-group">
                       <input class="form-control" formControlName="city" type="email" placeholder="Thành phố">
                       <i class="ti-location-pin"></i>
                     </div>
                   </div>
-                  <div class="col-md-3 col-sm-6">
+
+
+                  <div class="col-md-2.1 col-sm-6">
+                    <div class="search-category-container">
+                      <label class="styled-select">
+                        <select class="form-control" formControlName="idFormJob" style="height: 55px;">
+                          <option value="">Kiểu công việc</option>
+                          <option *ngFor="let c of formJob" value="{{c.idFormJob}}">{{c.nameFormJob}}</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-2.1 col-sm-6">
                     <div class="search-category-container">
                       <label class="styled-select">
                         <select class="form-control" formControlName="idField" style="height: 55px;">
@@ -270,6 +287,7 @@
                     <button type="submit" class="btn btn-search-icon"><i class="ti-search"></i></button>
                   </div>
                 </div>
+
               </form>
             </div>
             <div class="popular-jobs">
@@ -884,7 +902,7 @@
   <i class="ti-arrow-up"></i>
 </a>
 
-<div class="container"  style="z-index: 100">
+<div class="container" style="z-index: 100">
   <!-- Trigger the modal with a button --><!-- Modal -->
   <div class="modal" id="CreateCv">
     <div class="modal-dialog">
@@ -988,22 +1006,22 @@
 <div class="modalConfirm" style="display: none" id="modalConfirmApply">
   <div class="modal__layout"></div>
   <div class="modal__body">
-<!--    <div  class="modal fade">-->
-      <div class="modal-dialog modal-confirm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div class="icon-box">
-              <i class="fa-solid fa-check"></i>
-            </div>
-            <h4 class="modal-title w-100">Apply thành công </h4>
+    <!--    <div  class="modal fade">-->
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="fa-solid fa-check"></i>
           </div>
-          <div class="modal-body">
-            <p class="text-center">Vui lòng đợi mail khi có thông báo từ doanh nghiệp </p>
-          </div>
-          <div class="modal-footer">
-          </div>
+          <h4 class="modal-title w-100">Apply thành công </h4>
         </div>
-<!--      </div>-->
+        <div class="modal-body">
+          <p class="text-center">Vui lòng đợi mail khi có thông báo từ doanh nghiệp </p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      <!--      </div>-->
     </div>
   </div>
 </div>
@@ -1052,7 +1070,6 @@
     </div>
   </div>
 </div>
-
 
 
 <!-- Main JS  -->
