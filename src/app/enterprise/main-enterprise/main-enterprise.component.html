@@ -3307,7 +3307,6 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Root-->
 <!--begin::Drawers-->
 <!--begin::Activities drawer-->
-<div>
   <section class="find-job section">
     <div class="container">
       <h2 class="section-title">Việc làm Hot</h2>
@@ -3373,17 +3372,18 @@ License: For each use you must have a valid license purchased only from above li
                           <div>{{postEnterpriseDetail?.describePostEnterprise}}
                           </div>
                         </div>
-                        <div class="modal-footer">
+
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         </div>
                       </div>
                     </div>
                   </div>
 
-
-                  <a class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)"
-                     style="background-color: black;" data-toggle="modal" data-target="#PostDetail">Chi tiết</a>
+                <div class="modal-footer">
+                  <button class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)"
+                          style="background-color: white" data-toggle="modal" data-target="#PostDetail">Chi tiết</button>
                 </div>
+
               </div>
             </div>
           </div>
@@ -3409,7 +3409,7 @@ License: For each use you must have a valid license purchased only from above li
       </div>
     </div>
   </section>
-</div>
+
 <div id="kt_activities" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="activities" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'lg': '900px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_activities_toggle" data-kt-drawer-close="#kt_activities_close">
   <div class="card shadow-none rounded-0">
     <!--begin::Header-->
@@ -6528,5 +6528,8 @@ License: For each use you must have a valid license purchased only from above li
 
 </div>
 
-
+<!---->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
