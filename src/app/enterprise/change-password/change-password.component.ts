@@ -15,6 +15,7 @@ import {ChangePassWord} from "../../model/ChangePassWord";
 
 export class ChangePasswordComponent implements OnInit {
   checkpass!: boolean;
+  checkpassOld!: boolean;
   appUser!: AppUser[];
   enterprise!: Enterprise[];
   setPassWord!: ChangePassWord;
@@ -26,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkpass = true;
+    this.checkpassOld = true;
     this.checkEmail = true;
     this.loginService.findAllEnterprise().subscribe((data) => {
       this.enterprise = data;
@@ -37,6 +39,7 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm = new FormGroup({
     email: new FormControl("", Validators.required),
+    passwordOld: new FormControl("", Validators.required),
     passwordNew: new FormControl("", Validators.required),
     enterPassword: new FormControl("", Validators.required),
   })
@@ -65,6 +68,26 @@ export class ChangePasswordComponent implements OnInit {
       this.checkpass = false
     }
   }
+
+
+  checkpasswordOld() {
+    this.checkpassOld = false;
+    let passwordCheck = this.changePasswordForm.value.passwordOld
+    for (let i = 0; i < this.appUser.length; i++) {
+      if (passwordCheck == this.appUser[i].password) {
+        this.checkpassOld = true
+        break;
+      }
+    }
+    for (let i = 0; i < this.enterprise.length; i++) {
+      if (passwordCheck == this.enterprise[i].passwordEnterprise) {
+        this.checkpassOld = true
+        break;
+      }
+    }
+    console.log(this.checkpassOld)
+  }
+
 
   checkEmailU() {
     this.checkEmail = false;
