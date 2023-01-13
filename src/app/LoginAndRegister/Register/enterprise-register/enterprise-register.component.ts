@@ -4,9 +4,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Enterprise} from "../../../model/Enterprise";
 import {Field} from "../../../model/Field";
 import {Router} from "@angular/router";
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import {AngularFireStorage} from '@angular/fire/compat/storage';
 import {finalize, Observable} from "rxjs";
 import {AppUser} from "../../../model/AppUser";
+
 @Component({
   selector: 'app-enterprise-register',
   templateUrl: './enterprise-register.component.html',
@@ -62,44 +63,44 @@ export class EnterpriseRegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
     nameEnterprise: new FormControl("", Validators.required),
-    codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("[0-9]+")]),
-    gmailEnterprise: new FormControl("",[Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),Validators.required]),
+    codeConfirmEnterprise: new FormControl("", [Validators.required, Validators.pattern("[0-9]+")]),
+    gmailEnterprise: new FormControl("", [Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"), Validators.required]),
     imgEnterprise: new FormControl(""),
     addressMainEnterprise: new FormControl("", Validators.required),
     idField: new FormControl(),
     describeEnterprise: new FormControl("", Validators.required),
   })
 
-   async register() {
-     if(this.registerForm.valid){
-       this.registerForm.get("imgEnterprise")?.setValue(this.fb);
-       let filed = this.registerForm.value;
-       let filedNew = {
-         nameEnterprise: filed.nameEnterprise,
-         codeConfirmEnterprise: filed.codeConfirmEnterprise,
-         gmailEnterprise: filed.gmailEnterprise,
-         imgEnterprise: filed.imgEnterprise,
-         addressMainEnterprise: filed.addressMainEnterprise,
-         describeEnterprise: filed.describeEnterprise,
-         fieldEnterprise: {
-           idField: filed.idField
-         }
-       }
+  async register() {
+    if (this.registerForm.valid) {
+      this.registerForm.get("imgEnterprise")?.setValue(this.fb);
+      let filed = this.registerForm.value;
+      let filedNew = {
+        nameEnterprise: filed.nameEnterprise,
+        codeConfirmEnterprise: filed.codeConfirmEnterprise,
+        gmailEnterprise: filed.gmailEnterprise,
+        imgEnterprise: filed.imgEnterprise,
+        addressMainEnterprise: filed.addressMainEnterprise,
+        describeEnterprise: filed.describeEnterprise,
+        fieldEnterprise: {
+          idField: filed.idField
+        }
+      }
 
-       //Form đăng ký
-      this.loginService.register(filedNew).subscribe(() =>{
-         this.funcionAleartRegisterSuccess();
+      //Form đăng ký
+      this.loginService.register(filedNew).subscribe(() => {
+        this.funcionAleartRegisterSuccess();
         this.registerForm = new FormGroup({
           nameEnterprise: new FormControl("", Validators.required),
-          codeConfirmEnterprise: new FormControl("", [Validators.required,Validators.pattern("[0-9]+")]),
-          gmailEnterprise: new FormControl("",[Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),Validators.required]),
+          codeConfirmEnterprise: new FormControl("", [Validators.required, Validators.pattern("[0-9]+")]),
+          gmailEnterprise: new FormControl("", [Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"), Validators.required]),
           imgEnterprise: new FormControl(""),
           addressMainEnterprise: new FormControl("", Validators.required),
           idField: new FormControl(),
           describeEnterprise: new FormControl("", Validators.required),
         })
-       })
-     }
+      })
+    }
   }
 
   checkEmailE() {
@@ -121,16 +122,18 @@ export class EnterpriseRegisterComponent implements OnInit {
     }
     console.log(this.checkEmail)
   }
-  funcionAleartRegisterSuccess(){
-     // @ts-ignore
-    document.getElementById("modalConfirmRegister").style.display="block";
-    setTimeout(function (){
-      // @ts-ignore
-      document.getElementById("modalConfirmRegister").style.display="none";
 
-    },3000)
+  funcionAleartRegisterSuccess() {
+    // @ts-ignore
+    document.getElementById("modalConfirmRegister").style.display = "block";
+    setTimeout(function () {
+      // @ts-ignore
+      document.getElementById("modalConfirmRegister").style.display = "none";
+
+    }, 3000)
   }
-  routerLogin(){
+
+  routerLogin() {
     this.router.navigate([""]);
   }
 }

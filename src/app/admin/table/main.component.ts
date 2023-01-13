@@ -154,5 +154,33 @@ export class MainComponent implements OnInit{
       },3000);
     },3500)
 
+    // changeCodeViForm = new FormGroup({
+    //   codeViOld: new FormControl("", Validators.required),
+    //   codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+    //   codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+    // })
+    //
+    // changeCodeVi() {
+    //   if(this.changeCodeViForm.valid){
+    //     let id = this.enterpriseLogin.idEnterprise;
+    //     if (this.changeCodeViForm.value.codeViNewAgain === this.changeCodeViForm.value.codeViNew && this.changeCodeViForm.value.codeViOld === this.enterpriseLogin.codeViEnterprise) {
+    //       this.enterpriseService.changeCodeVi(id, String(this.changeCodeViForm.value.codeViNew)).subscribe(() => {
+    //         alert("Thay đổi mã ví thành công");
+    //         this.changeCodeViForm = new FormGroup({
+    //           codeViOld: new FormControl("", Validators.required),
+    //           codeViNew: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+    //           codeViNewAgain: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
+    //         })
+    //         this.enterpriseLoginFunction();
+    //       })
+    //     } else {
+    //       alert("Vui lòng kiểm tra lại có gì đó chưa đúng!")
+    //     }
+    //   }
+    //   else {
+    //     alert("Dữ liệu form không hợp lệ !")
+    //   }
+    // }
+
   }
 }

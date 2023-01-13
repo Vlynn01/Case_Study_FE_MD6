@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 import {NotiEnter} from "../../model/NotiEnter";
 import {UserApply} from "../../model/UserApply";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {AppUser} from "../../model/AppUser";
+import {ChangePassWord} from "../../model/ChangePassWord";
 
 @Component({
   selector: 'app-table-enterprise',
@@ -19,27 +21,33 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
   styleUrls: ['./main-enterprise.component.css']
 })
 export class MainEnterpriseComponent implements OnInit {
- p:any;
+  p: any;
   enterpriseLogin!: Enterprise;
   listFormJob!: FormJob[];
   listRegime!: Regime[];
   listField!: Field[];
-  listPostByIdEnterprise!:PostEnterprise[];
+  listPostByIdEnterprise!: PostEnterprise[];
   postEnterpriseKey!: PostEnterprise;
-  postEdit!:PostEnterprise;
-  imgEdit!:string
-  editProfileEnterPrise!:Enterprise;
-  profileForm!:any;
+  postEdit!: PostEnterprise;
+  imgEdit!: string
+  editProfileEnterPrise!: Enterprise;
+  profileForm!: any;
   fb: string = "";
   notifiApplyFromUser!: NotiEnter[];
-  idConfirmNotifi!:number;
-  listUserApplyByIdPost!:UserApply[];
-  userApplyById!:UserApply;
-  imgCvByIdUserApply!:string;
+  idConfirmNotifi!: number;
+  listUserApplyByIdPost!: UserApply[];
+  userApplyById!: UserApply;
+  imgCvByIdUserApply!: string;
   title = "cloudsSorage";
   downloadURL: Observable<string> | undefined;
-  constructor(private router:Router,private storage: AngularFireStorage, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+
+  routerChangePass(){
+    this.router.navigate(["/changePass"]);
   }
+
+  constructor(private router: Router, private storage: AngularFireStorage, private enterpriseService: EnterpriseService, private loginService: LoginService) {
+  }
+
   ngOnInit(): void {
     this.enterpriseLoginFunction();
     this.enterpriseService.findAllFormJob().subscribe((data) => {
@@ -59,6 +67,7 @@ export class MainEnterpriseComponent implements OnInit {
     })
     this.deletePostExpired();
   }
+
   onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
@@ -86,27 +95,29 @@ export class MainEnterpriseComponent implements OnInit {
   }
 
 
-
   createPostForm = new FormGroup({
-        namePostEnterprise: new FormControl("", Validators.required),
-        addressMainEnterprise: new FormControl("", Validators.required),
-        idField: new FormControl(),
-        idFormJob: new FormControl(),
-        idRegime: new FormControl(),
-        salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-        vacanciesPostEnterprise: new FormControl("", Validators.required),
-        expirationDatePostEnterprise: new FormControl("", Validators.required),
-        describePostEnterprise: new FormControl("", Validators.required),
-      })
+    namePostEnterprise: new FormControl("", Validators.required),
+    addressMainEnterprise: new FormControl("", Validators.required),
+    idField: new FormControl(),
+    idFormJob: new FormControl(),
+    idRegime: new FormControl(),
+    salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+    salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+    vacanciesPostEnterprise: new FormControl("", Validators.required),
+    expirationDatePostEnterprise: new FormControl("", Validators.required),
+    describePostEnterprise: new FormControl("", Validators.required),
+  })
+
   setStatusEnterpriseTo1() {
     this.enterpriseService.setStatusEnterpriseTo1(this.enterpriseLogin.idEnterprise).subscribe(() => {
     })
   }
-  logout(){
+
+  logout() {
     this.loginService.logout();
     this.router.navigate(["/login"]);
   }
+
   enterpriseLoginFunction(): void {
     let username = this.loginService.getUserToken().username;
     this.enterpriseService.findEnterpriseByName(username).subscribe((data) => {
@@ -119,9 +130,10 @@ export class MainEnterpriseComponent implements OnInit {
     })
 
   }
-  getAllPostByEnterprise(){
-    this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data)=>{
-      this.listPostByIdEnterprise=data;
+
+  getAllPostByEnterprise() {
+    this.enterpriseService.findAllByIdEnterprise(this.enterpriseLogin.idEnterprise).subscribe((data) => {
+      this.listPostByIdEnterprise = data;
     })
   }
 
@@ -159,8 +171,8 @@ export class MainEnterpriseComponent implements OnInit {
           idField: new FormControl(),
           idFormJob: new FormControl(),
           idRegime: new FormControl(),
-          salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-          salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+          salarySmallPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+          salaryBigPostEnterprise: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
           vacanciesPostEnterprise: new FormControl("", Validators.required),
           expirationDatePostEnterprise: new FormControl("", Validators.required),
           describePostEnterprise: new FormControl("", Validators.required),
@@ -170,28 +182,28 @@ export class MainEnterpriseComponent implements OnInit {
       alert("Form khong hop le !");
     }
   }
+
   confirmCreatePost() {
-    if(this.validateExpirationDate()  && this.validatesalaryBigPostEnterprise()){
-          this.createPost();
-        }else {
-          alert("Vui lòng kiểm tra lại form");
-        }
+    if (this.validateExpirationDate() && this.validatesalaryBigPostEnterprise()) {
+      this.createPost();
+    } else {
+      alert("Vui lòng kiểm tra lại form");
     }
+  }
 
 
   // Validate các forrm
 
-  validatesalaryBigPostEnterprise():boolean{
-      if(Number(this.createPostForm.value.salarySmallPostEnterprise)>=Number(this.createPostForm.value.salaryBigPostEnterprise)){
-        // @ts-ignore
-        document.getElementById("validateSalary").style.display="block";
-        return false;
-      }
-      else {
-        // @ts-ignore
-        document.getElementById("validateSalary").style.display="none";
-        return true;
-      }
+  validatesalaryBigPostEnterprise(): boolean {
+    if (Number(this.createPostForm.value.salarySmallPostEnterprise) >= Number(this.createPostForm.value.salaryBigPostEnterprise)) {
+      // @ts-ignore
+      document.getElementById("validateSalary").style.display = "block";
+      return false;
+    } else {
+      // @ts-ignore
+      document.getElementById("validateSalary").style.display = "none";
+      return true;
+    }
   }
 
   validateExpirationDate() {
@@ -209,26 +221,27 @@ export class MainEnterpriseComponent implements OnInit {
     }
   }
 
-  editStatus(id: number){
-    this.enterpriseService.findPostById(id).subscribe((data)=>{
-        this.postEnterpriseKey =data;
-        if(!this.postEnterpriseKey.statusPostEnterprise){
-             this.enterpriseService.openKeyPost(id).subscribe(()=>{
-               alert("Mở khóa thành công !")
-               this.getAllPostByEnterprise();
-             })
-        }else {
-          this.enterpriseService.statusPost(id).subscribe(()=>{
-            alert("Khóa thành công !")
-            this.getAllPostByEnterprise();
-          })
-        }
+  editStatus(id: number) {
+    this.enterpriseService.findPostById(id).subscribe((data) => {
+      this.postEnterpriseKey = data;
+      if (!this.postEnterpriseKey.statusPostEnterprise) {
+        this.enterpriseService.openKeyPost(id).subscribe(() => {
+          alert("Mở khóa thành công !")
+          this.getAllPostByEnterprise();
+        })
+      } else {
+        this.enterpriseService.statusPost(id).subscribe(() => {
+          alert("Khóa thành công !")
+          this.getAllPostByEnterprise();
+        })
+      }
     })
   }
+
   //edit bài post
-  editPost(id:number){
-    this.enterpriseService.findPostById(id).subscribe((data)=>{
-      this.postEdit=data;
+  editPost(id: number) {
+    this.enterpriseService.findPostById(id).subscribe((data) => {
+      this.postEdit = data;
       this.editPostForm.get("namePostEnterpriseEdit")?.setValue(this.postEdit.namePostEnterprise);
       this.editPostForm.get("addressMainEnterpriseEdit")?.setValue(this.postEdit.addressMainEnterprise);
       this.editPostForm.get("salarySmallPostEnterpriseEdit")?.setValue(Number(this.postEdit.salarySmallPostEnterprise));
@@ -238,101 +251,103 @@ export class MainEnterpriseComponent implements OnInit {
       this.editPostForm.get("describePostEnterpriseEdit")?.setValue(this.postEdit.describePostEnterprise);
     })
   }
+
   editPostForm = new FormGroup({
     namePostEnterpriseEdit: new FormControl("", Validators.required),
     addressMainEnterpriseEdit: new FormControl("", Validators.required),
     idFieldEdit: new FormControl(),
     idFormJobEdit: new FormControl(),
     idRegimeEdit: new FormControl(),
-    salarySmallPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
-    salaryBigPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0),Validators.pattern("^[0-9]+")]),
+    salarySmallPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
+    salaryBigPostEnterpriseEdit: new FormControl(0, [Validators.required, Validators.min(0), Validators.pattern("^[0-9]+")]),
     vacanciesPostEnterpriseEdit: new FormControl("", Validators.required),
     expirationDatePostEnterpriseEdit: new FormControl("", Validators.required),
     describePostEnterpriseEdit: new FormControl("", Validators.required),
   })
 
-  editPostConfim(){
-      if(this.editPostForm.valid){
-        let editPostForm = this.editPostForm.value;
-        let postEnterprise = {
-          idPostEnterprise:this.postEdit.idPostEnterprise,
-          namePostEnterprise: editPostForm.namePostEnterpriseEdit,
-          addressMainEnterprise: editPostForm.addressMainEnterpriseEdit,
-          field: {
-            idField: editPostForm.idFieldEdit
-          },
-          regime: {
-            idRegime: editPostForm.idRegimeEdit
-          },
-          formJobPostEnterprise: {
-            idFormJob: editPostForm.idFormJobEdit
-          },
-          salarySmallPostEnterprise: editPostForm.salarySmallPostEnterpriseEdit,
-          salaryBigPostEnterprise: editPostForm.salaryBigPostEnterpriseEdit,
-          vacanciesPostEnterprise: editPostForm.vacanciesPostEnterpriseEdit,
-          expirationDatePostEnterprise: editPostForm.expirationDatePostEnterpriseEdit,
-          describePostEnterprise: editPostForm.describePostEnterpriseEdit,
-          enterprise: {
-            idEnterprise: this.enterpriseLogin.idEnterprise,
-          }
+  editPostConfim() {
+    if (this.editPostForm.valid) {
+      let editPostForm = this.editPostForm.value;
+      let postEnterprise = {
+        idPostEnterprise: this.postEdit.idPostEnterprise,
+        namePostEnterprise: editPostForm.namePostEnterpriseEdit,
+        addressMainEnterprise: editPostForm.addressMainEnterpriseEdit,
+        field: {
+          idField: editPostForm.idFieldEdit
+        },
+        regime: {
+          idRegime: editPostForm.idRegimeEdit
+        },
+        formJobPostEnterprise: {
+          idFormJob: editPostForm.idFormJobEdit
+        },
+        salarySmallPostEnterprise: editPostForm.salarySmallPostEnterpriseEdit,
+        salaryBigPostEnterprise: editPostForm.salaryBigPostEnterpriseEdit,
+        vacanciesPostEnterprise: editPostForm.vacanciesPostEnterpriseEdit,
+        expirationDatePostEnterprise: editPostForm.expirationDatePostEnterpriseEdit,
+        describePostEnterprise: editPostForm.describePostEnterpriseEdit,
+        enterprise: {
+          idEnterprise: this.enterpriseLogin.idEnterprise,
         }
-        this.enterpriseService.editPost(postEnterprise).subscribe(() => {
-          alert("Chỉnh sửa bài viết  thành công!")
-          this.getAllPostByEnterprise();
-        })
-      }else {
-          alert("Xin vui lòng kiểm tra lại form !")
       }
+      this.enterpriseService.editPost(postEnterprise).subscribe(() => {
+        alert("Chỉnh sửa bài viết  thành công!")
+        this.getAllPostByEnterprise();
+      })
+    } else {
+      alert("Xin vui lòng kiểm tra lại form !")
     }
+  }
 
 //    danh sách thông báo khi có ng apply
-  notifiFromUserApply(){
-      let idEnterprise = this.enterpriseLogin.idEnterprise;
-      this.enterpriseService.listNorifiFromApplyUser(idEnterprise).subscribe((data)=>{
+  notifiFromUserApply() {
+    let idEnterprise = this.enterpriseLogin.idEnterprise;
+    this.enterpriseService.listNorifiFromApplyUser(idEnterprise).subscribe((data) => {
       this.notifiApplyFromUser = data;
-      })
+    })
   }
 
-  setIdConfirmNotifi(id: number){
+  setIdConfirmNotifi(id: number) {
     this.idConfirmNotifi = id;
   }
-  confirmNotifi(){
+
+  confirmNotifi() {
     this.funcitonAleartConfirmUserCv();
-    this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(()=>{
-         this.notifiFromUserApply();
-       })
+    this.enterpriseService.confirmNotifi(this.idConfirmNotifi).subscribe(() => {
+      this.notifiFromUserApply();
+    })
   }
 
-  userApplyByIdPost(id:number){
-    this.enterpriseService.allUserApplyByIdPost(id).subscribe((data)=>{
-      this.listUserApplyByIdPost =data;
-       })
+  userApplyByIdPost(id: number) {
+    this.enterpriseService.allUserApplyByIdPost(id).subscribe((data) => {
+      this.listUserApplyByIdPost = data;
+    })
   }
 
 
 //  XÓA BÀI ĐĂNG khi hết hạn
-  deletePostExpired(){
-    this.enterpriseService.deletePostExpired().subscribe(()=>{
+  deletePostExpired() {
+    this.enterpriseService.deletePostExpired().subscribe(() => {
     })
   }
 
 //  tìm dối tượng userApply theo id;
 
-  getUserApplyById(id:number){
-      this.enterpriseService.getUserApplyById(id).subscribe((data)=>{
-        this.userApplyById =data;
-        this.imgCvByIdUserApply=this.userApplyById.imgCV;
-        console.log(this.imgCvByIdUserApply);
-        console.log(id)
-      })
+  getUserApplyById(id: number) {
+    this.enterpriseService.getUserApplyById(id).subscribe((data) => {
+      this.userApplyById = data;
+      this.imgCvByIdUserApply = this.userApplyById.imgCV;
+      console.log(this.imgCvByIdUserApply);
+      console.log(id)
+    })
   }
 
-  editProfile(){
+  editProfile() {
 
-    let id=this.enterpriseLogin.idEnterprise;
-    this.enterpriseService.findEnterpriseById(id).subscribe((data)=>{
-      this.editProfileEnterPrise=data;
-      this.imgEdit= this.editProfileEnterPrise.imgEnterprise;
+    let id = this.enterpriseLogin.idEnterprise;
+    this.enterpriseService.findEnterpriseById(id).subscribe((data) => {
+      this.editProfileEnterPrise = data;
+      this.imgEdit = this.editProfileEnterPrise.imgEnterprise;
       this.formProfile.get("nameEnterprise")?.setValue(this.editProfileEnterPrise.nameEnterprise);
       this.formProfile.get("codeConfirmEnterprise")?.setValue(this.editProfileEnterPrise.codeConfirmEnterprise);
       this.formProfile.get("gmailEnterprise")?.setValue(this.editProfileEnterPrise.gmailEnterprise);
@@ -344,6 +359,7 @@ export class MainEnterpriseComponent implements OnInit {
     })
 
   }
+
   formProfile = new FormGroup({
     // idEnterprise: new FormControl(0, Validators.required),
     nameEnterprise: new FormControl("", Validators.required),
@@ -359,7 +375,7 @@ export class MainEnterpriseComponent implements OnInit {
   editProfileEnterprise() {
     let filed = this.formProfile.value;
     let filedNew = {
-      idEnterprise:this.enterpriseLogin.idEnterprise,
+      idEnterprise: this.enterpriseLogin.idEnterprise,
       nameEnterprise: filed.nameEnterprise,
       codeConfirmEnterprise: filed.codeConfirmEnterprise,
       gmailEnterprise: filed.gmailEnterprise,
@@ -376,30 +392,33 @@ export class MainEnterpriseComponent implements OnInit {
       alert("Lưu thay đổi thành công");
     })
   }
-  funcitonAleartConfirmUserCv(){
+
+  funcitonAleartConfirmUserCv() {
     // @ts-ignore
-    document.getElementById("modalConfirmUserCv").style.display="block";
-    setTimeout(function (){
+    document.getElementById("modalConfirmUserCv").style.display = "block";
+    setTimeout(function () {
       // @ts-ignore
-      document.getElementById("modalConfirmUserCv").style.display="none";
+      document.getElementById("modalConfirmUserCv").style.display = "none";
       // @ts-ignore
-      document.getElementById("modalConfirmCvUser").style.display="block";
-      setTimeout(function (){
+      document.getElementById("modalConfirmCvUser").style.display = "block";
+      setTimeout(function () {
         // @ts-ignore
-        document.getElementById("modalConfirmCvUser").style.display="none";
+        document.getElementById("modalConfirmCvUser").style.display = "none";
 
-      },3000);
-    },3500)
+      }, 3000);
+    }, 3500)
   }
 
 
-  functionAleartCreatePost(){
+  functionAleartCreatePost() {
     // @ts-ignore
-    document.getElementById("modalConfirmCreatePost").style.display="block";
-    setTimeout(function (){
+    document.getElementById("modalConfirmCreatePost").style.display = "block";
+    setTimeout(function () {
       // @ts-ignore
-      document.getElementById("modalConfirmCreatePost").style.display="none";
+      document.getElementById("modalConfirmCreatePost").style.display = "none";
 
-    },3000);
+    }, 3000);
   }
+
+
 }
