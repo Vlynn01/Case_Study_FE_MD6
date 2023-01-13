@@ -53,4 +53,6 @@ export class UserService {
   findEverything(param_str:string):Observable<any>{
     return this.http.get<any>(`http://localhost:8080/user/find-everything` + param_str)
   }
+
+
 }

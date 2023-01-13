@@ -13,6 +13,7 @@ import {doc} from "@angular/fire/firestore";
 import {UserApply} from "../../model/UserApply";
 import {UserToken} from "../../model/UserToken";
 import {FormJob} from "../../model/FormJob";
+import {Enterprise} from "../../model/Enterprise";
 
 @Component({
   selector: 'app-homepage',
@@ -30,7 +31,8 @@ export class HomepageComponent implements OnInit {
   formJob!: FormJob[];
   idJobApply!:number;
   page:number=1;
-  address!: string;
+  address!: PostEnterprise[];
+  nameEnterprise!: Enterprise[];
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
   postEnterpriseDetail!: PostEnterprise;
@@ -42,9 +44,14 @@ export class HomepageComponent implements OnInit {
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
-
     this.loginService.findAllFormJob2().subscribe((data) => {
-      this.formJob = data
+      this.formJob = data;
+    })
+    this.loginService.findAllAddress().subscribe((data)=>{
+      this.address = data;
+    })
+    this.loginService.findAllEnterprise1().subscribe((data)=>{
+      this.nameEnterprise = data;
     })
     this.listPostByOderPriority();
     this.findCvByIdUser();

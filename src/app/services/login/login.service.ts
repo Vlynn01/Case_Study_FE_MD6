@@ -6,6 +6,7 @@ import {Field} from "../../model/Field";
 import {AppUser} from "../../model/AppUser";
 import {Enterprise} from "../../model/Enterprise";
 import {FormJob} from "../../model/FormJob";
+import {PostEnterprise} from "../../model/PostEnterprise";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,13 @@ export class LoginService {
 
   findAllFormJob2():Observable<FormJob[]>{
     return this.http.get<any>(`http://localhost:8080/user/findAllFormJob`,);
+  }
+
+  findAllAddress():Observable<PostEnterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/user/find-all-address`,)
+  }
+  findAllEnterprise1():Observable<Enterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/user/find-all-enterprise`,)
   }
 
   findUserByName(name:string):Observable<AppUser>{
