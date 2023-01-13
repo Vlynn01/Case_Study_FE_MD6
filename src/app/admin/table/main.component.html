@@ -326,9 +326,10 @@
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tình trạng đăng
                     bài
                   </th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Tỷ lệ
-                    lợi nhuận
-                  </th>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06d5bfffff8ede7e5da2015b76afa5ff839ae20f
                   <th></th>
                 </tr>
                 </thead>
@@ -575,13 +576,13 @@
           <div class="modal-body">
 
             <div class="form-group">
-            <textarea style="height: 150px;;" type="text" class="form-control" formControlName="banEnterprise" value=""
+            <textarea style="height: 150px;;" type="text" class="form-control"  value=""
                       placeholder="Nhập lý do khóa tài khoản">
             </textarea>
             </div>
             <div>
               <!--            (click)=""-->
-              <span type="submit" (click)=" confirmBan()" class=" btn btn-default btn btn-info add-new">Xác nhận</span>
+              <span type="submit" (click)=" confirmBan()" data-toggle="modal" data-target="#banEnterprise"  class=" btn btn-default btn btn-info add-new">Xác nhận</span>
             </div>
 
           </div>
@@ -624,28 +625,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12" style="display: flex;justify-content: center">
-                          <div class="counting" style="width: 60%">
-                            <div class="icon">
-                              <i class='fas fa-book-open' style='font-size:30px;color:white; margin-left: 50px'></i>
-                            </div>
-                            <div class="desc">
-                              <h2 style="font-size:20px ; color: white">Bài đăng Vip</h2>
-                              <h1 class="counter" style="color: white; margin-left: 50px">{{totalPostVip}}</h1>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12" style="display: flex;justify-content: center">
-                          <div class="counting"  style="width: 70%">
-                            <div class="icon">
-                              <i class='fas fa-book-open' style='font-size:30px;color:white; margin-left: 50px'></i>
-                            </div>
-                            <div class="desc">
-                              <h2 style="font-size:20px ; color: white">Bài đăng thường</h2>
-                              <h1 class="counter" style="color: white; margin-left: 50px">{{totalPostNormal}}</h1>
-                            </div>
-                          </div>
-                        </div>
+
                         <!--                            <div class="col-md-3 col-sm-6 col-xs-12">-->
                         <!--                              <div class="counting">-->
                         <!--                                <div class="icon">-->
@@ -685,12 +665,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
+          <div class="form-group" >
             Bạn muốn mở khóa cho doanh nghiệp này?
           </div>
           <div>
             <!--            (click)=""-->
-            <span type="submit" (click)="confirmUnBan()" class=" btn btn-default btn btn-info add-new">Xác nhận</span>
+            <span type="submit" (click)="confirmUnBan()" data-toggle="modal" data-target="#unbanEnterprise"  class=" btn btn-default btn btn-info add-new">Xác nhận</span>
           </div>
         </div>
       </div>

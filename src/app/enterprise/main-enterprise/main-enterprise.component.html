@@ -1,17 +1,4 @@
 
-<!--
-Author: Keenthemes
-Product Name: Seven HTML Free  - Bootstrap 5 HTML Multipurpose Light/Dark Admin Dashboard Theme
-Upgrade to Pro: https://keenthemes.com/products/seven-html-pro
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-
-<!--begin::Head-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
 <link rel="canonical" href="Https://preview.keenthemes.com/seven-html-free" />
@@ -1789,7 +1776,6 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                           <!--begin::Description-->
                         </a>
-                        <!--                        end tuan-->
 
                         <a  class="custom-list d-flex align-items-center px-5 py-4">
                           <!--begin::Symbol-->
@@ -3278,7 +3264,7 @@ License: For each use you must have a valid license purchased only from above li
                         <span class="text-muted fw-bold d-block fs-7">SDT : {{a.userApply.numberCV}}</span>
                         <span class="text-muted fw-bold d-block fs-7">  {{a.userApply.mailCv}} </span>
                       </div>
-                      <span id="confirmCV" *ngIf="!a.statusConfirm" (click)="setIdConfirmNotifi(a.id)" data-toggle="modal" data-target="#myModalConfirmCV" style="color: red;cursor: pointer" class="badge badge-light fw-bolder my-2">Xác thức !</span>
+                      <span id="confirmCV" *ngIf="!a.statusConfirm" (click)="setIdConfirmNotifi(a.id)" data-toggle="modal" data-target="#myModalConfirmCV" style="color: red;cursor: pointer" class="badge badge-light fw-bolder my-2">Xác thực !</span>
                     </div>
                     <!--end::Section-->
                   </div>
@@ -3307,6 +3293,109 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Root-->
 <!--begin::Drawers-->
 <!--begin::Activities drawer-->
+  <section class="find-job section">
+    <div class="container">
+      <h2 class="section-title">Việc làm Hot</h2>
+      <div class="row" style="position: relative;height: 600px">
+        <div class="col-md-12" *ngFor="let a of postEnterpriseOffer">
+          <div style="width: 100%" class="job-list">
+            <div class="thumb">
+              <a><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a>
+            </div>
+            <div class="job-list-content">
+              <h4><a href="">{{a.namePostEnterprise}}</a><span
+                class="full-time">{{a.formJobPostEnterprise.nameFormJob}}</span></h4>
+              <p>{{a.describePostEnterprise}}</p>
+              <div class="job-tag">
+                <div class="pull-left">
+                  <div class="meta-tag">
+                    <span><a href=""><i class="ti-brush"></i>{{a.vacanciesPostEnterprise}}</a></span>
+                    <span><i class="ti-location-pin"></i>{{a.addressMainEnterprise}}</span>
+                    <span><i class="ti-time"></i>{{a.expirationDatePostEnterprise}}</span>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="icon">
+                    <i class="ti-heart"></i>
+                  </div>
+                  <!-- Modal chi tiết bài đăng -->
+                  <div class="modal fade" id="PostDetail" tabindex="-1" role="dialog" aria-labelledby="PostDetail"
+                       aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel1">{{postEnterpriseDetail?.namePostEnterprise}}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <table>
+                            <th>
+                              <tr style="align-items: center"><a><img style="width: 100px"
+                                                                      src="{{postEnterpriseDetail?.enterprise?.imgEnterprise}}"
+                                                                      alt=""></a></tr>
+                              <tr><h5
+                                style="color: #FD003A;text-align: center;margin-top: 10px">{{postEnterpriseDetail?.enterprise?.nameEnterprise}}</h5>
+                              </tr>
+                            </th>
+                            <th class="col-lg-4 col-sm-6 item-blue">
+                              <tr>Địa điểm: {{postEnterpriseDetail?.addressMainEnterprise}}</tr>
+                              <tr>Ngành nghề: {{postEnterpriseDetail?.field?.nameField}}</tr>
+                              <tr>Hình thức: {{postEnterpriseDetail?.formJobPostEnterprise?.nameFormJob}}</tr>
+                            </th>
+                            <th class="col-lg-4 col-sm-6 item-blue">
+                              <tr>Lương: {{postEnterpriseDetail?.salarySmallPostEnterprise}} tr
+                                - {{postEnterpriseDetail?.salaryBigPostEnterprise}} tr
+                              </tr>
+                              <tr>Vị trí: {{postEnterpriseDetail?.vacanciesPostEnterprise}}</tr>
+                              <tr>Hạn ứng tuyển: {{postEnterpriseDetail?.expirationDatePostEnterprise}}</tr>
+                            </th>
+                          </table>
+                        </div>
+                        <div class="modal-body">
+                          <h3> Mô tả công việc</h3>
+                          <div>{{postEnterpriseDetail?.describePostEnterprise}}
+                          </div>
+                        </div>
+
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)"
+                          style="background-color: white" data-toggle="modal" data-target="#PostDetail">Chi tiết</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: none;color: red" id="NOData" class="job-list">
+          <p style="font-size: 25px;border: none">Không có dữ liệu !</p>
+        </div>
+        <div class="col-md-12" style="position: absolute;bottom: -30px">
+          <div class="showing pull-left">
+          </div>
+          <ul class="pagination pull-right">
+            <li class="active"><a id="preveAfter" (click)="preveBefore()" class="btn btn-common"><i
+              class="ti-angle-left"></i> prev</a></li>
+            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(1)">1</a></li>
+            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(2)">2</a></li>
+            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(3)">3</a></li>
+            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(4)">4</a></li>
+            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(5)">5</a></li>
+            <li class="active"><a id="preveBefore" (click)="preveAfter()" class="btn btn-common">Next <i
+              class="ti-angle-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <div id="kt_activities" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="activities" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'lg': '900px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_activities_toggle" data-kt-drawer-close="#kt_activities_close">
   <div class="card shadow-none rounded-0">
     <!--begin::Header-->
@@ -3925,9 +4014,7 @@ License: For each use you must have a valid license purchased only from above li
 </div>
 <!--end::Activities drawer-->
 <!--begin::Exolore drawer toggle-->
-<button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-8 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-5 rounded-top-0" title="Upgrade to Seven HTML Pro" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover">
-  <span id="kt_explore_toggle_label">Upgrade to Pro</span>
-</button>
+
 <!--end::Exolore drawer toggle-->
 <!--begin::Exolore drawer-->
 <div id="kt_explore" class="explore bg-white" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'lg': '440px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
@@ -3935,7 +4022,6 @@ License: For each use you must have a valid license purchased only from above li
   <div class="card shadow-none rounded-0 w-100">
     <!--begin::Header-->
     <div class="card-header" id="kt_explore_header">
-      <h5 class="card-title fw-bold text-gray-600">Upgrade To Pro</h5>
       <div class="card-toolbar">
         <button type="button" class="btn btn-sm btn-icon explore-btn-dismiss me-n5" id="kt_explore_close">
           <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
@@ -6004,7 +6090,7 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="form_name1">Vị trí ứng tuyển </label>
-                            <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập tên bài đăng" required="required" data-error="Firstname is required.">
+                            <input id="form_name1" type="text" formControlName="vacanciesPostEnterprise" name="name" class="form-control" placeholder="Nhập vị trí ứng tuyển" required="required" data-error="Firstname is required.">
                           </div>
                           <p *ngIf="!createPostForm.get('vacanciesPostEnterprise')?.valid && createPostForm.get('vacanciesPostEnterprise')?.touched"style="color: red;margin: 0">Dữ liệu không hợp lệ!</p>
                         </div>
@@ -6039,7 +6125,7 @@ License: For each use you must have a valid license purchased only from above li
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="form_need1">Chọn gói</label>
+                            <label for="form_need1">Chế độ lam việc</label>
                             <select id="form_need1" name="need" formControlName="idRegime" class="form-control" required="required" data-error="Vip-thường">
                               <option *ngFor="let a of listRegime" value="{{a.idRegime}}">{{a.nameRegime}}</option>
                             </select>
@@ -6361,7 +6447,7 @@ License: For each use you must have a valid license purchased only from above li
               </div>
             </div>
             <div class="modal-footer col-md-12">
-              <input type="submit" style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block"  value="Lưu thay đổi" >
+              <input type="submit" style="width: 100%" class="btn btn-success btn-send  pt-2 btn-block" data-bs-toggle="modal" data-bs-target="#changeProfileEterprise" value="Lưu thay đổi" >
             </div>
           </div>
         </form>
@@ -6422,7 +6508,11 @@ License: For each use you must have a valid license purchased only from above li
       <!--      </div>-->
     </div>
   </div>
+
 </div>
 
-
+<!---->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 

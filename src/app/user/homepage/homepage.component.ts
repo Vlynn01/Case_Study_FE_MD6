@@ -12,7 +12,12 @@ import {CvUser} from "../../model/CvUser";
 import {doc} from "@angular/fire/firestore";
 import {UserApply} from "../../model/UserApply";
 import {UserToken} from "../../model/UserToken";
+
 import {AppUser} from "../../model/AppUser";
+
+import {FormJob} from "../../model/FormJob";
+import {Enterprise} from "../../model/Enterprise";
+
 
 @Component({
   selector: 'app-homepage',
@@ -37,8 +42,11 @@ export class HomepageComponent implements OnInit {
   fb: string = "";
   downloadURL: Observable<string> | undefined;
   fields!:Field[];
+  formJob!: FormJob[];
   idJobApply!:number;
   page:number=1;
+  address!: PostEnterprise[];
+  nameEnterprise!: Enterprise[];
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
 
   }
@@ -58,9 +66,21 @@ export class HomepageComponent implements OnInit {
       this.fields = data;
     })
 
+
     /*
     nguyen sua
      */
+
+    this.loginService.findAllFormJob2().subscribe((data) => {
+      this.formJob = data;
+    })
+    this.loginService.findAllAddress().subscribe((data)=>{
+      this.address = data;
+    })
+    this.loginService.findAllEnterprise1().subscribe((data)=>{
+      this.nameEnterprise = data;
+    })
+
     this.listPostByOderPriority();
 
     this.findCvByIdUser();
@@ -303,44 +323,104 @@ export class HomepageComponent implements OnInit {
   }
   searchForm=new FormGroup({
     nameEnterprise: new FormControl(""),
-    city: new FormControl(""),
+    address: new FormControl(""),
     idField: new FormControl(""),
+    idFormJob: new FormControl("")
   })
-  search(){
-    let search=this.searchForm.value;
-    let searchform = {
-      nameEnterprise: search.nameEnterprise,
-      city: search.city,
-      idField: search.idField,
+
+  search() {
+    let search = this.searchForm.value;
+
+    // Build param
+    let searchParam = '';
+    if (search.address != "" || this.searchForm.value.idField != "" ||
+      this.searchForm.value.idFormJob != "" || this.searchForm.value.nameEnterprise != "") {
+      searchParam += '?';
+
+      if (search.address != "") {
+        searchParam += 'address=' + search.address + "&";
       }
-      if(this.searchForm.value.city=="" && this.searchForm.value.idField=="" && this.searchForm.value.nameEnterprise==""){
-        location.reload();
+
+      if (search.idFormJob != "") {
+        searchParam += 'id-form-job=' + search.idFormJob + "&";
       }
-    if (this.searchForm.value.idField==""){
-      this.loginService.findPostByUserField(searchform).subscribe((data) => {
-        this.postEnterpriseOffer = data;
-        if(this.postEnterpriseOffer.length===0){
-          // @ts-ignore
-          document.getElementById('NOData').style.display = "block";
-        }else {
-          // @ts-ignore
-          document.getElementById('NOData').style.display = "none";
-        }
-      })
-    }else {
-      this.loginService.findPostByUser(searchform).subscribe((data) => {
-        this.postEnterpriseOffer = data;
-        if(this.postEnterpriseOffer.length===0){
-          // @ts-ignore
-          document.getElementById('NOData').style.display = "block";
-        }else {
-          // @ts-ignore
-          document.getElementById('NOData').style.display = "none";
-        }
-      })
+
+      if (search.idField != "") {
+        searchParam += 'id-field=' + search.idField + "&";
+      }
+
+      if (search.nameEnterprise != "") {
+        searchParam += 'name-enterprise=' + search.nameEnterprise + "&";
+      }
+
+      searchParam.substring(0, searchParam.length - 1);
     }
 
+    this.userService.findEverything(searchParam).subscribe((data) => {
+      this.postEnterpriseOffer = data;
+      console.log(this.postEnterpriseOffer)
+      if(this.postEnterpriseOffer.length===0){
+        // @ts-ignore
+        document.getElementById('NOData').style.display = "block";
+      }else {
+        // @ts-ignore
+        document.getElementById('NOData').style.display = "none";
+      }
+    })
+
+    // if (this.searchForm.value.idFormJob == this.searchForm.value.idFormJob || this.searchForm.value.idField== this.searchForm.value.idField || this.searchForm.value.city== this.searchForm.value.city){
+    //   console.log("findEverything")
+    //   this.userService.findEverything(searchform).subscribe((data) => {
+    //     this.postEnterpriseOffer = data;
+    //     if(this.postEnterpriseOffer.length===0){
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "block";
+    //     }else {
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "none";
+    //     }
+    //   })
+    // }else {
+    //   console.log("findPostByUser")
+    //   this.loginService.findPostByUser(searchform).subscribe((data) => {
+    //     this.postEnterpriseOffer = data;
+    //     if(this.postEnterpriseOffer.length===0){
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "block";
+    //     }else {
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "none";
+    //     }
+    //   })
+    // }
+
+    // if (this.searchForm.value.idFormJob==""){
+    //   this.loginService.findPostByUserFormJob(searchform).subscribe((data) => {
+    //     this.postEnterpriseOffer = data;
+    //     if(this.postEnterpriseOffer.length===0){
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "block";
+    //     }else {
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "none";
+    //     }
+    //   })
+    // }else {
+    //   this.loginService.findPostByUser(searchform).subscribe((data) => {
+    //     this.postEnterpriseOffer = data;
+    //     if(this.postEnterpriseOffer.length===0){
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "block";
+    //     }else {
+    //       // @ts-ignore
+    //       document.getElementById('NOData').style.display = "none";
+    //     }
+    //   })
+    // }
+
   }
+
+
   deltalComponent(){
        this.router.navigate(["/user/deltal"])
   }

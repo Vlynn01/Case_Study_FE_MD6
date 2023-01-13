@@ -20,6 +20,7 @@ export class MainComponent implements OnInit{
   totalPostNormal!: Number;
   totalAllPost!: Number;
   idBan!:number;
+  idEnterprice! : Enterprise[];
 
 
 

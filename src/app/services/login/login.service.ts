@@ -5,11 +5,19 @@ import {UserToken} from "../../model/UserToken";
 import {Field} from "../../model/Field";
 import {AppUser} from "../../model/AppUser";
 import {Enterprise} from "../../model/Enterprise";
+import {FormJob} from "../../model/FormJob";
+import {PostEnterprise} from "../../model/PostEnterprise";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+    findAllFormJob1() {
+        throw new Error('Method not implemented.');
+    }
+    findAllFormJob() {
+        throw new Error('Method not implemented.');
+    }
 
   constructor(private http:HttpClient) { }
   login(user: any): Observable<UserToken>{
@@ -78,6 +86,21 @@ setName(name:string){
   findAllField():Observable<Field[]>{
     return this.http.get<any>("http://localhost:8080/register/findAllField");
   }
+
+  findAllFormJob2():Observable<FormJob[]>{
+    return this.http.get<any>(`http://localhost:8080/user/findAllFormJob`,);
+  }
+
+  findAllAddress():Observable<PostEnterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/user/find-all-address`,)
+  }
+  findAllEnterprise1():Observable<Enterprise[]>{
+    return this.http.get<any>(`http://localhost:8080/user/find-all-enterprise`,)
+  }
+
+  findUserByName(name:string):Observable<AppUser>{
+    return this.http.get<any>(`http://localhost:8080/user/finduser/${name}`)
+  }
   findFieldById(id:number):Observable<Field>{
     return this.http.get<any>(`http://localhost:8080/register/find/${id}`);
   }
@@ -104,5 +127,9 @@ changePassword(checkPassWord:any):Observable<any>{
   }
   findPostByUserField(post:any){
     return this.http.post<any>("http://localhost:8080/user/findPostUserField",post);
+  }
+
+  findPostByUserFormJob(post:any){
+    return this.http.post<any>("http://localhost:8080/user/findByAddressAndFormJob",post);
   }
 }

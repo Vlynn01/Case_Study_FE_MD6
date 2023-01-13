@@ -1,6 +1,9 @@
 import {Roles} from "./Roles";
 
 export class UserToken{
+  findUserByName(username: string) {
+      throw new Error('Method not implemented.');
+  }
   id: number;
   username: string;
   token:string;
