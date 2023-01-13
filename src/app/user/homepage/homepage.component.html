@@ -155,20 +155,40 @@
               <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a><i
                 class="ti-pencil-alt"></i>Tạo CV</a></li>
               <li class="right"><a style="cursor: pointer" (click)="logout()"><i class="ti-lock"></i>Đăng xuất</a></li>
+
+
+<!--              nguyen lm hien thi ten dang nhap-->
+
+              <li class ="right"><a style="cursor: pointer" class="ti-user">{{userName}}</a>
+                </li>
+
+<!--             nguyen sua-->
+<!--              <li class="right"><a style="cursor: pointer" (click)="userName()"><i class="ti-lock" [value]="userName"></i>Xin chào</a></li>-->
+
+<!--                  <div class ="col-md-6"><label class="right">User Name</label>-->
+<!--                    <input readonly type="text" class="form-control" [value]="userName"></div>-->
+
+
             </ul>
+
           </div>
+
         </div>
+
         <!-- Mobile Menu Start -->
         <ul class="wpb-mobile-menu">
           <li>
             <a class="active" href="index.html">Home</a>
             <ul>
+
               <li><a class="active" href="index.html">Home 1</a></li>
               <li><a href="index-02.html">Home 2</a></li>
               <li><a href="index-03.html">Home 3</a></li>
               <li><a href="index-04.html">Home 4</a></li>
             </ul>
+
           </li>
+
           <li>
             <a (click)="deltalComponent()">Pages</a>
             <ul>

@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EnterpriseService} from "../../services/enterprise/enterprise.service";
 import {LoginService} from "../../services/login/login.service";
 
+
 @Component({
   selector: 'app-mainEnterprise',
   templateUrl: './main.component.html',
@@ -20,9 +21,15 @@ export class MainComponent implements OnInit{
   totalAllPost!: Number;
   idBan!:number;
 
+
+
+  // userName!:any;
+
   constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService,private loginService:LoginService) {
 
+
   }
+  userName = localStorage.getItem("username");
 
   ngOnInit(): void {
 
@@ -32,6 +39,10 @@ export class MainComponent implements OnInit{
     this.adminService.getAllEnterPriseConfirm().subscribe((data)=>{
       this.enterprisesConfirm=data;
     })
+    /*
+nguyen sua
+ */
+    // this.userName = localStorage.getItem("userName");
   }
   logout(){
       this.loginService.logout();
@@ -47,6 +58,8 @@ export class MainComponent implements OnInit{
     this.adminService.getAllEnterPriseNotConfirm().subscribe((data)=>{
       this.enterprisesNotConfirm=data;
     })
+
+
   }
   getAllConfirm(){
     this.adminService.getAllEnterPriseConfirm().subscribe((data)=>{

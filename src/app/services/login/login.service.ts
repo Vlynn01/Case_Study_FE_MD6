@@ -21,6 +21,48 @@ export class LoginService {
   getToken(){
        return localStorage.getItem("token");
   }
+
+  // nguyen sua
+
+  setUsername(username:any){
+    return localStorage.setItem("username",username);
+  }
+  getUsername(){
+    return localStorage.getItem("username");
+  }
+  setEmail(email:any){
+    return localStorage.setItem("email",email);
+  }
+  getEmail(){
+  return localStorage.getItem("email");
+}
+
+setName(name:string){
+    return localStorage.setItem("name",name);
+}
+ getName(name:string){
+    return localStorage.getItem("name");
+ }
+
+ setTelephone(telephone:string){
+    return localStorage.setItem("telephone",telephone)
+ }
+ getTelephone(telephone:string){
+    return localStorage.getItem("telephone");
+ }
+
+  setimgCV(imgCV:string){
+    return localStorage.setItem("telephone",imgCV)
+  }
+  getimgCV(imgCV:string){
+    return localStorage.getItem("imgCV");
+  }
+
+
+  // nguyen sua
+
+
+
   setUserToken(userToken: UserToken){
     localStorage.setItem("userToken",JSON.stringify(userToken));
   }

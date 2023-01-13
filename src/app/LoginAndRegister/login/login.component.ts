@@ -32,10 +32,18 @@ export class LoginComponent implements OnInit {
   login() {
      if(this.loginForm.valid){
        this.loginService.login(this.loginForm.value).subscribe((data) => {
-         console.log(data);
-         console.log(this.loginForm.value)
          this.loginService.setUserToken(data);
          this.loginService.setToken(data.token);
+
+
+         // nguyen sua
+        //  this.loginService.setUsername(data.username);
+        // this.loginService.setEmail(data.email);
+        // this.loginService.setTelephone(data.telephone);
+        // this.loginService.setName(data.name);
+
+       // nguyen sua
+
          if(data.roles.name==="ROLE_ADMIN"){
            this.router.navigate(["/admin"]);
          }else if(data.roles.name==="ROLE_ENTERPRISE"){

@@ -12,6 +12,7 @@ import {CvUser} from "../../model/CvUser";
 import {doc} from "@angular/fire/firestore";
 import {UserApply} from "../../model/UserApply";
 import {UserToken} from "../../model/UserToken";
+import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-homepage',
@@ -19,6 +20,16 @@ import {UserToken} from "../../model/UserToken";
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
+  //
+  // // nguyen sua
+  // constructor(private loginService:LoginService) {
+  // }
+  //
+  //
+  // userName!:any;
+  // //nguyen sua
+
+
   // fields!: Field[];
   indexPagination: number = 1;
   totalPagination!: number;
@@ -29,7 +40,14 @@ export class HomepageComponent implements OnInit {
   idJobApply!:number;
   page:number=1;
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
+
   }
+
+  userName = localStorage.getItem("username");
+
+
+
+
   postEnterpriseDetail!: PostEnterprise;
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
@@ -39,13 +57,22 @@ export class HomepageComponent implements OnInit {
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
     })
+
+    /*
+    nguyen sua
+     */
     this.listPostByOderPriority();
+
     this.findCvByIdUser();
+
     this.deletePostExpired()
+
     let pageChange = document.getElementsByClassName("pageChange");
     // @ts-ignore
     pageChange[this.page-1].style.background="#FF4F57";
   }
+
+
 
   logout() {
     this.loginService.logout();

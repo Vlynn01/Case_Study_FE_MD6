@@ -129,12 +129,23 @@
           </div>
         </div>
         <ul class="navbar-nav  justify-content-end">
+
+
           <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-              <i class="fa fa-user me-sm-1"></i>
+              <i class="fa-solid fa-right-from-bracket me-sm-2"></i>
               <span class="d-sm-inline d-none" (click)="logout()">Đăng xuất</span>
             </a>
+
           </li>
+
+          <li class="nav-item d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white font-weight-bold px-3">
+              <i class="fa-solid fa-user me-sm-2"></i>
+              <span class="d-sm-inline d-none">{{userName}}</span>
+            </a>
+          </li>
+
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
               <div class="sidenav-toggler-inner">
