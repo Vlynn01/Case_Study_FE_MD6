@@ -30,6 +30,7 @@ export class HomepageComponent implements OnInit {
   formJob!: FormJob[];
   idJobApply!:number;
   page:number=1;
+  address!: string;
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
   postEnterpriseDetail!: PostEnterprise;

@@ -65,23 +65,19 @@ export class EnterpriseService {
   }
 
   findPostByAddress(address: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:8080/enterprise/findbyaddress/${address}`,);
+    return this.http.get<any>(`http://localhost:8080/enterprise/findAddress/${address}`,);
   }
 
   findByNamePost(name : string) : Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/enterprise/findByNamepost/${name}`);
+    return this.http.get<any>(`http://localhost:8080/enterprise/findByNamePost/${name}`);
   }
 
-  findByNameEnterprise(name : string) : Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/enterprise/findByEnterprise/${name}`);
+  findByNameEnterprise(id : number) : Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findByEnterprise/${id}`);
   }
 
-  // findPostBySalary(salary:number) : Observable<any>{
-  //   return this.http.get<any>(`http://localhost:8080/enterprise/findSalary/${salary}`);
-  // }
-
-  findByFormjob(id:number): Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/enterprise/findByFormjob/${id}`)
+  findPostBySalary(salary:number) : Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/enterprise/findSalary/${salary}`);
   }
 
 

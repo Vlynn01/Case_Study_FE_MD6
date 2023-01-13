@@ -6,7 +6,6 @@ import { MainEnterpriseComponent } from './main-enterprise/main-enterprise.compo
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppComponent} from "../app.component";
 import {NgxPaginationModule} from "ngx-pagination";
-// import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -18,8 +17,7 @@ import {NgxPaginationModule} from "ngx-pagination";
         EnterpriseRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxPaginationModule,
-        // NgxPaginationModule
+        NgxPaginationModule
     ],
 })
 export class EnterpriseModule { }

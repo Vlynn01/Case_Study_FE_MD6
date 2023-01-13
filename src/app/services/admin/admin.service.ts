@@ -37,9 +37,9 @@ export class AdminService {
     return this.http.get<any>(`http://localhost:8080/enterprise/sumAllPostEnterprise/${id}`)
   }
   banEnterprise(id:number,content:any):Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/admin/banEnterprise/${id}`,content);
+    return this.http.post<any>(`http://localhost:8080/admin/setStatusEnterpriseTo0/${id}`, content);
   }
   unbanEnterprise(id:number):Observable<any> {
-    return this.http.get<any>(`http://localhost:8080/admin/unbanEnterprise/${id}`);
+    return this.http.get<any>(`http://localhost:8080/admin/setStatusEnterpriseTo1/${id}`);
   }
 }
