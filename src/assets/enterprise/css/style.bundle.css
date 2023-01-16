@@ -1,3 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
 @charset "UTF-8";
 :root {
   --bs-blue: #009ef6;
@@ -47245,3 +47247,4 @@ body {
 .docs-aside-menu .menu-item .menu-icon {
   justify-content: flex-start;
 }
+
