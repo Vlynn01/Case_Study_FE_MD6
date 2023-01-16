@@ -300,6 +300,10 @@ export class HomepageComponent implements OnInit {
 
     // Build param
     let searchParam = '';
+    if (search.address == "" && this.searchForm.value.idField == "" &&
+      this.searchForm.value.idFormJob == "" && this.searchForm.value.nameEnterprise == ""){
+      location.reload();
+    }
     if (search.address != "" || this.searchForm.value.idField != "" ||
       this.searchForm.value.idFormJob != "" || this.searchForm.value.nameEnterprise != "") {
       searchParam += '?';
@@ -334,57 +338,6 @@ export class HomepageComponent implements OnInit {
         document.getElementById('NOData').style.display = "none";
       }
     })
-
-    // if (this.searchForm.value.idFormJob == this.searchForm.value.idFormJob || this.searchForm.value.idField== this.searchForm.value.idField || this.searchForm.value.city== this.searchForm.value.city){
-    //   console.log("findEverything")
-    //   this.userService.findEverything(searchform).subscribe((data) => {
-    //     this.postEnterpriseOffer = data;
-    //     if(this.postEnterpriseOffer.length===0){
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "block";
-    //     }else {
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "none";
-    //     }
-    //   })
-    // }else {
-    //   console.log("findPostByUser")
-    //   this.loginService.findPostByUser(searchform).subscribe((data) => {
-    //     this.postEnterpriseOffer = data;
-    //     if(this.postEnterpriseOffer.length===0){
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "block";
-    //     }else {
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "none";
-    //     }
-    //   })
-    // }
-
-    // if (this.searchForm.value.idFormJob==""){
-    //   this.loginService.findPostByUserFormJob(searchform).subscribe((data) => {
-    //     this.postEnterpriseOffer = data;
-    //     if(this.postEnterpriseOffer.length===0){
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "block";
-    //     }else {
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "none";
-    //     }
-    //   })
-    // }else {
-    //   this.loginService.findPostByUser(searchform).subscribe((data) => {
-    //     this.postEnterpriseOffer = data;
-    //     if(this.postEnterpriseOffer.length===0){
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "block";
-    //     }else {
-    //       // @ts-ignore
-    //       document.getElementById('NOData').style.display = "none";
-    //     }
-    //   })
-    // }
-
   }
 
 

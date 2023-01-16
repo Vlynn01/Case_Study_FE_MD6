@@ -184,6 +184,7 @@ export class MainEnterpriseComponent implements OnInit {
           describePostEnterprise: new FormControl("", Validators.required),
         })
       })
+      location.reload();
     } else {
       alert("Form khong hop le !");
     }
@@ -299,6 +300,7 @@ export class MainEnterpriseComponent implements OnInit {
       this.enterpriseService.editPost(postEnterprise).subscribe(() => {
         alert("Chỉnh sửa bài viết  thành công!")
         this.getAllPostByEnterprise();
+        location.reload();
       })
     } else {
       alert("Xin vui lòng kiểm tra lại form !")
@@ -396,6 +398,7 @@ export class MainEnterpriseComponent implements OnInit {
 
     this.enterpriseService.editProfile(filedNew).subscribe(() => {
       alert("Lưu thay đổi thành công");
+      location.reload();
     })
   }
 
