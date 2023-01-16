@@ -50,6 +50,11 @@ export class MainEnterpriseComponent implements OnInit {
   constructor(private router: Router, private storage: AngularFireStorage,private userService: UserService, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
 
+
+  // nguyen
+  userName = localStorage.getItem("username");
+
+
   ngOnInit(): void {
     this.enterpriseLoginFunction();
     this.enterpriseService.findAllFormJob().subscribe((data) => {

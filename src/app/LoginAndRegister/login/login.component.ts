@@ -20,12 +20,15 @@ export class LoginComponent implements OnInit {
     username: new FormControl("", Validators.required),
     password: new FormControl("", Validators.required)
   })
+
+
   routerRegisterEnterprise(){
        this.router.navigate(["/registerEnterprise"])
   }
   routerRegisterUser() {
           this.router.navigate(["/registerUser"]);
   }
+
   routerForgotPass(){
     this.router.navigate(["/forgotPass"]);
   }

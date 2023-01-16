@@ -27,6 +27,11 @@ export class EnterpriseRegisterComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router, private storage: AngularFireStorage) {
   }
 
+
+
+
+
+
   onFileSelected({event}: { event: any }) {
     var n = Date.now();
     const file = event.target.files[0];
