@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
          console.log(data);
          console.log(this.loginForm.value)
          this.loginService.setUserToken(data);
+
+         //nguyen sua
+         this.loginService.setUsername(data.username);
+
          this.loginService.setToken(data.token);
          if(data.roles.name==="ROLE_ADMIN"){
            this.router.navigate(["/admin"]);

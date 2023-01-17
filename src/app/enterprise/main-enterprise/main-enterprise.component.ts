@@ -47,8 +47,14 @@ export class MainEnterpriseComponent implements OnInit {
   enterprise!:Enterprise[];
   downloadURL: Observable<string> | undefined;
 
+  routerChangePass(){
+    this.router.navigate(["/changePass"]);
+  }
+
   constructor(private router: Router, private storage: AngularFireStorage,private userService: UserService, private enterpriseService: EnterpriseService, private loginService: LoginService) {
   }
+
+  userName = localStorage.getItem("username");
 
   ngOnInit(): void {
     this.enterpriseLoginFunction();

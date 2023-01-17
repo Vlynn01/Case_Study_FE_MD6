@@ -16,6 +16,11 @@ export class DeltalComponent implements OnInit {
   userApply!:UserApply;
   page:number =1;
   constructor(private userService: UserService,private enterpriseService:EnterpriseService,private loginService: LoginService) { }
+
+  userName= localStorage.getItem("username");
+
+
+
   ngOnInit(): void {
       this.getListApply();
   }

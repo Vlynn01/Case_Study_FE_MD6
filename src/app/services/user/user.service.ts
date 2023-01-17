@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   listPostByOderPriority(id:number,page:number):Observable<PostEnterprise[]>{
-    return this.http.get<any>(`http://localhost:8080/user/listPostByOderPriority/${id}/${page}`);
+    return this.http.get<any>(`http://localhost:8080/user/find-everything?user_id=${id}&page=${page}`)
   }
   getAll( page:any):Observable<PostEnterprise[]>{
     return this.http.get<any>(`http://localhost:8080/user/getAll/${page}`,);
@@ -50,8 +50,8 @@ export class UserService {
   }
 
   // http://localhost:8080/user/find-everything?abc=xxx&xyz=xxx
-  findEverything(param_str:string):Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/user/find-everything` + param_str)
+  findEverything(param_str:string, user_id : number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/user/find-everything?user_id=`+ user_id + param_str)
   }
 
 

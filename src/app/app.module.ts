@@ -13,6 +13,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import { ForgotPasComponent } from './LoginAndRegister/forgot-pass/forgot-pas.component';
 import {DeltalComponent} from "./user/deltal/deltal.component";
+import {ChangePasswordComponent} from "./enterprise/change-password/change-password.component";
 
 
 
@@ -22,7 +23,9 @@ import {DeltalComponent} from "./user/deltal/deltal.component";
     UserRegisterComponent,
     EnterpriseRegisterComponent,
     LoginComponent,
+    ChangePasswordComponent,
     ForgotPasComponent,
+
 
   ],
   imports: [

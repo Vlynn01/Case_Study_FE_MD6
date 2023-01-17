@@ -1749,12 +1749,16 @@
                                <i style="color: black" class="fa-solid fa-lock"></i>
 																</span>
                           </div>
+                          <div>
+                            <h5 style="cursor: pointer" (click)="routerChangePass()">Đổi mật khẩu?</h5>
+                          </div>
                           <!--end::Symbol-->
                           <!--begin::Description-->
 
                           <!--begin::Description-->
                         </a>
                         <!---->
+
                         <a class="custom-list d-flex align-items-center px-5 py-4">
                           <!--begin::Symbol-->
                           <div class="symbol symbol-40px me-5">
@@ -3293,108 +3297,108 @@
 <!--end::Root-->
 <!--begin::Drawers-->
 <!--begin::Activities drawer-->
-  <section class="find-job section">
-    <div class="container">
-      <h2 class="section-title">Việc làm Hot</h2>
-      <div class="row" style="position: relative;height: 600px">
-        <div class="col-md-12" *ngFor="let a of postEnterpriseOffer">
-          <div style="width: 100%" class="job-list">
-            <div class="thumb">
-              <a><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a>
-            </div>
-            <div class="job-list-content">
-              <h4><a href="">{{a.namePostEnterprise}}</a><span
-                class="full-time">{{a.formJobPostEnterprise.nameFormJob}}</span></h4>
-              <p>{{a.describePostEnterprise}}</p>
-              <div class="job-tag">
-                <div class="pull-left">
-                  <div class="meta-tag">
-                    <span><a href=""><i class="ti-brush"></i>{{a.vacanciesPostEnterprise}}</a></span>
-                    <span><i class="ti-location-pin"></i>{{a.addressMainEnterprise}}</span>
-                    <span><i class="ti-time"></i>{{a.expirationDatePostEnterprise}}</span>
-                  </div>
-                </div>
-                <div class="pull-right">
-                  <div class="icon">
-                    <i class="ti-heart"></i>
-                  </div>
-                  <!-- Modal chi tiết bài đăng -->
-                  <div class="modal fade" id="PostDetail" tabindex="-1" role="dialog" aria-labelledby="PostDetail"
-                       aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel1">{{postEnterpriseDetail?.namePostEnterprise}}</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <table>
-                            <th>
-                              <tr style="align-items: center"><a><img style="width: 100px"
-                                                                      src="{{postEnterpriseDetail?.enterprise?.imgEnterprise}}"
-                                                                      alt=""></a></tr>
-                              <tr><h5
-                                style="color: #FD003A;text-align: center;margin-top: 10px">{{postEnterpriseDetail?.enterprise?.nameEnterprise}}</h5>
-                              </tr>
-                            </th>
-                            <th class="col-lg-4 col-sm-6 item-blue">
-                              <tr>Địa điểm: {{postEnterpriseDetail?.addressMainEnterprise}}</tr>
-                              <tr>Ngành nghề: {{postEnterpriseDetail?.field?.nameField}}</tr>
-                              <tr>Hình thức: {{postEnterpriseDetail?.formJobPostEnterprise?.nameFormJob}}</tr>
-                            </th>
-                            <th class="col-lg-4 col-sm-6 item-blue">
-                              <tr>Lương: {{postEnterpriseDetail?.salarySmallPostEnterprise}} tr
-                                - {{postEnterpriseDetail?.salaryBigPostEnterprise}} tr
-                              </tr>
-                              <tr>Vị trí: {{postEnterpriseDetail?.vacanciesPostEnterprise}}</tr>
-                              <tr>Hạn ứng tuyển: {{postEnterpriseDetail?.expirationDatePostEnterprise}}</tr>
-                            </th>
-                          </table>
-                        </div>
-                        <div class="modal-body">
-                          <h3> Mô tả công việc</h3>
-                          <div>{{postEnterpriseDetail?.describePostEnterprise}}
-                          </div>
-                        </div>
+<!--  <section class="find-job section">-->
+<!--    <div class="container">-->
+<!--      <h2 class="section-title">Việc làm Hot</h2>-->
+<!--      <div class="row" style="position: relative;height: 600px">-->
+<!--        <div class="col-md-12" *ngFor="let a of postEnterpriseOffer">-->
+<!--          <div style="width: 100%" class="job-list">-->
+<!--            <div class="thumb">-->
+<!--              <a><img style="width: 100px" src="{{a.enterprise.imgEnterprise}}" alt=""></a>-->
+<!--            </div>-->
+<!--            <div class="job-list-content">-->
+<!--              <h4><a href="">{{a.namePostEnterprise}}</a><span-->
+<!--                class="full-time">{{a.formJobPostEnterprise.nameFormJob}}</span></h4>-->
+<!--              <p>{{a.describePostEnterprise}}</p>-->
+<!--              <div class="job-tag">-->
+<!--                <div class="pull-left">-->
+<!--                  <div class="meta-tag">-->
+<!--                    <span><a href=""><i class="ti-brush"></i>{{a.vacanciesPostEnterprise}}</a></span>-->
+<!--                    <span><i class="ti-location-pin"></i>{{a.addressMainEnterprise}}</span>-->
+<!--                    <span><i class="ti-time"></i>{{a.expirationDatePostEnterprise}}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="pull-right">-->
+<!--                  <div class="icon">-->
+<!--                    <i class="ti-heart"></i>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; Modal chi tiết bài đăng &ndash;&gt;-->
+<!--                  <div class="modal fade" id="PostDetail" tabindex="-1" role="dialog" aria-labelledby="PostDetail"-->
+<!--                       aria-hidden="true">-->
+<!--                    <div class="modal-dialog" role="document">-->
+<!--                      <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                          <h5 class="modal-title" id="exampleModalLabel1">{{postEnterpriseDetail?.namePostEnterprise}}</h5>-->
+<!--                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span aria-hidden="true">&times;</span>-->
+<!--                          </button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!--                          <table>-->
+<!--                            <th>-->
+<!--                              <tr style="align-items: center"><a><img style="width: 100px"-->
+<!--                                                                      src="{{postEnterpriseDetail?.enterprise?.imgEnterprise}}"-->
+<!--                                                                      alt=""></a></tr>-->
+<!--                              <tr><h5-->
+<!--                                style="color: #FD003A;text-align: center;margin-top: 10px">{{postEnterpriseDetail?.enterprise?.nameEnterprise}}</h5>-->
+<!--                              </tr>-->
+<!--                            </th>-->
+<!--                            <th class="col-lg-4 col-sm-6 item-blue">-->
+<!--                              <tr>Địa điểm: {{postEnterpriseDetail?.addressMainEnterprise}}</tr>-->
+<!--                              <tr>Ngành nghề: {{postEnterpriseDetail?.field?.nameField}}</tr>-->
+<!--                              <tr>Hình thức: {{postEnterpriseDetail?.formJobPostEnterprise?.nameFormJob}}</tr>-->
+<!--                            </th>-->
+<!--                            <th class="col-lg-4 col-sm-6 item-blue">-->
+<!--                              <tr>Lương: {{postEnterpriseDetail?.salarySmallPostEnterprise}} tr-->
+<!--                                - {{postEnterpriseDetail?.salaryBigPostEnterprise}} tr-->
+<!--                              </tr>-->
+<!--                              <tr>Vị trí: {{postEnterpriseDetail?.vacanciesPostEnterprise}}</tr>-->
+<!--                              <tr>Hạn ứng tuyển: {{postEnterpriseDetail?.expirationDatePostEnterprise}}</tr>-->
+<!--                            </th>-->
+<!--                          </table>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!--                          <h3> Mô tả công việc</h3>-->
+<!--                          <div>{{postEnterpriseDetail?.describePostEnterprise}}-->
+<!--                          </div>-->
+<!--                        </div>-->
 
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<!--                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
 
-                <div class="modal-footer">
-                  <button class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)"
-                          style="background-color: white" data-toggle="modal" data-target="#PostDetail">Chi tiết</button>
-                </div>
+<!--                <div class="modal-footer">-->
+<!--                  <button class="btn btn-common btn-rm" (click)="postDetail(a.idPostEnterprise)"-->
+<!--                          style="background-color: white" data-toggle="modal" data-target="#PostDetail">Chi tiết</button>-->
+<!--                </div>-->
 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="display: none;color: red" id="NOData" class="job-list">
-          <p style="font-size: 25px;border: none">Không có dữ liệu !</p>
-        </div>
-        <div class="col-md-12" style="position: absolute;bottom: -30px">
-          <div class="showing pull-left">
-          </div>
-          <ul class="pagination pull-right">
-            <li class="active"><a id="preveAfter" (click)="preveBefore()" class="btn btn-common"><i
-              class="ti-angle-left"></i> prev</a></li>
-            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(1)">1</a></li>
-            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(2)">2</a></li>
-            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(3)">3</a></li>
-            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(4)">4</a></li>
-            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(5)">5</a></li>
-            <li class="active"><a id="preveBefore" (click)="preveAfter()" class="btn btn-common"> <i
-              class="ti-angle-right"></i>Next</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div style="display: none;color: red" id="NOData" class="job-list">-->
+<!--          <p style="font-size: 25px;border: none">Không có dữ liệu !</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-12" style="position: absolute;bottom: -30px">-->
+<!--          <div class="showing pull-left">-->
+<!--          </div>-->
+<!--          <ul class="pagination pull-right">-->
+<!--            <li class="active"><a id="preveAfter" (click)="preveBefore()" class="btn btn-common"><i-->
+<!--              class="ti-angle-left"></i> prev</a></li>-->
+<!--            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(1)">1</a></li>-->
+<!--            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(2)">2</a></li>-->
+<!--            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(3)">3</a></li>-->
+<!--            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(4)">4</a></li>-->
+<!--            <li><a class="pageChange" style="cursor: pointer" (click)="pageChange(5)">5</a></li>-->
+<!--            <li class="active"><a id="preveBefore" (click)="preveAfter()" class="btn btn-common"> <i-->
+<!--              class="ti-angle-right"></i>Next</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
 
 <div id="kt_activities" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="activities" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'lg': '900px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_activities_toggle" data-kt-drawer-close="#kt_activities_close">
   <div class="card shadow-none rounded-0">

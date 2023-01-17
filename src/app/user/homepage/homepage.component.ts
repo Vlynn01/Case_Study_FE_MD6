@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 import {PostEnterprise} from "../../model/PostEnterprise";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -27,19 +27,27 @@ export class HomepageComponent implements OnInit {
   title = "cloudsSorage";
   fb: string = "";
   downloadURL: Observable<string> | undefined;
-  fields!:Field[];
+  fields!: Field[];
   formJob!: FormJob[];
-  idJobApply!:number;
-  page:number=1;
+  idJobApply!: number;
+  page: number = 1;
   address!: PostEnterprise[];
   nameEnterprise!: Enterprise[];
+
   constructor(private router: Router, private userService: UserService, private storage: AngularFireStorage, private loginService: LoginService, private allService: AllService) {
   }
+
+  //nguyen sua
+
+  userName = localStorage.getItem("username")
+
+
   postEnterpriseDetail!: PostEnterprise;
   postEnterpriseOffer!: PostEnterprise[];
   cvByUser!: CvUser;
-  cvByIdAppUserAndIdPost!:UserApply;
-  userLogin!:UserToken;
+  cvByIdAppUserAndIdPost!: UserApply;
+  userLogin!: UserToken;
+
   ngOnInit(): void {
     this.loginService.findAllField().subscribe((data) => {
       this.fields = data;
@@ -47,18 +55,18 @@ export class HomepageComponent implements OnInit {
     this.loginService.findAllFormJob2().subscribe((data) => {
       this.formJob = data;
     })
-    this.loginService.findAllAddress().subscribe((data)=>{
+    this.loginService.findAllAddress().subscribe((data) => {
       this.address = data;
     })
-    this.loginService.findAllEnterprise1().subscribe((data)=>{
+    this.loginService.findAllEnterprise1().subscribe((data) => {
       this.nameEnterprise = data;
     })
-    this.listPostByOderPriority();
+    this.search(this.page);
     this.findCvByIdUser();
     this.deletePostExpired()
     let pageChange = document.getElementsByClassName("pageChange");
     // @ts-ignore
-    pageChange[this.page-1].style.background="#FF4F57";
+    pageChange[this.page - 1].style.background = "#FF4F57";
   }
 
   logout() {
@@ -91,50 +99,54 @@ export class HomepageComponent implements OnInit {
         }
       });
   }
-  pageChange(page:number){
-    this.page =page;
+
+  pageChange(page: number) {
+    this.page = page;
     let pageChange = document.getElementsByClassName("pageChange");
     // @ts-ignore
-    pageChange[this.page-1].style.background="#FF4F57";
-    for(let i=0;i<pageChange.length;i++){
-         if(i!== this.page-1){
-           // @ts-ignore
-           pageChange[i].style.background="#fff";
-         }
-     }
-    this.listPostByOderPriority();
-  }
-  preveAfter(){
-    let pageChange = document.getElementsByClassName("pageChange");
-    // @ts-ignore
-    pageChange[this.page].style.background="#FF4F57";
-    for(let i=0;i<pageChange.length;i++){
-      if(i!== this.page){
+    pageChange[this.page - 1].style.background = "#FF4F57";
+    for (let i = 0; i < pageChange.length; i++) {
+      if (i !== this.page - 1) {
         // @ts-ignore
-        pageChange[i].style.background="#fff";
+        pageChange[i].style.background = "#fff";
       }
     }
-    this.page=this.page+1;
-    this.listPostByOderPriority();
+    this.search(this.page);
+  }
+
+  preveAfter() {
+    let pageChange = document.getElementsByClassName("pageChange");
+    // @ts-ignore
+    pageChange[this.page].style.background = "#FF4F57";
+    for (let i = 0; i < pageChange.length; i++) {
+      if (i !== this.page) {
+        // @ts-ignore
+        pageChange[i].style.background = "#fff";
+      }
+    }
+    this.page = this.page + 1;
+    this.search(this.page);
     console.log(this.page)
   }
-  preveBefore(){
+
+  preveBefore() {
     console.log(this.page)
     let pageChange = document.getElementsByClassName("pageChange");
     // @ts-ignore
-    pageChange[this.page-2].style.background="#FF4F57";
-    for(let i=0;i<pageChange.length;i++){
-      if(i!== this.page-2){
+    pageChange[this.page - 2].style.background = "#FF4F57";
+    for (let i = 0; i < pageChange.length; i++) {
+      if (i !== this.page - 2) {
         // @ts-ignore
-        pageChange[i].style.background="#fff";
+        pageChange[i].style.background = "#fff";
       }
     }
-    this.page=this.page-1;
-    this.listPostByOderPriority();
+    this.page = this.page - 1;
+    this.search(this.page);
 
   }
+
   listPostByOderPriority() {
-    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id,this.page).subscribe((data) => {
+    return this.userService.listPostByOderPriority(this.loginService.getUserToken().id, this.page).subscribe((data) => {
       this.postEnterpriseOffer = data;
     })
   }
@@ -143,32 +155,31 @@ export class HomepageComponent implements OnInit {
   saveCvForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.pattern("[A-Za-z]+")]),
     telephone: new FormControl("", [Validators.required, Validators.pattern("^0[0-9]+")]),
-    mail: new FormControl("", [Validators.required , Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
+    mail: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
     imgCV: new FormControl()
   })
 
   saveCV() {
     let idLogin = this.loginService.getUserToken().id;
-    this.userService.findCvByIdUser(idLogin).subscribe((data)=>{
-      if(data!=null){
-        if(this.saveCvForm.valid){
+    this.userService.findCvByIdUser(idLogin).subscribe((data) => {
+      if (data != null) {
+        if (this.saveCvForm.valid) {
           this.saveChangeCV(idLogin);
-        }
-        else {
+        } else {
           alert("Lỗi form")
         }
-      }else {
-        if(this.saveCvForm.valid){
+      } else {
+        if (this.saveCvForm.valid) {
           this.saveCvNew(idLogin);
           this.functionAleartConfirmSaveCv();
-        }
-        else {
+        } else {
           alert("Lỗi form")
         }
       }
-  })
-}
-  saveCvNew(idLogin:number){
+    })
+  }
+
+  saveCvNew(idLogin: number) {
     this.saveCvForm.get("imgCV")?.setValue(this.fb);
     if (this.saveCvForm.value.imgCV === "") {
       alert("Vui lòng upload Cv")
@@ -191,7 +202,8 @@ export class HomepageComponent implements OnInit {
       })
     }
   }
-  saveChangeCV(idLogin:number) {
+
+  saveChangeCV(idLogin: number) {
     this.saveCvForm.get("imgCV")?.setValue(this.fb);
     if (this.saveCvForm.value.imgCV === "") {
       alert("Vui lòng  upload Cv")
@@ -213,6 +225,7 @@ export class HomepageComponent implements OnInit {
       })
     }
   }
+
   postDetail(id: number) {
     this.userService.postDetail(id).subscribe((data) => {
       this.postEnterpriseDetail = data;
@@ -235,105 +248,104 @@ export class HomepageComponent implements OnInit {
       }
     })
   }
-  setIdJobApply(id:number){
-    this.idJobApply =id;
+
+  setIdJobApply(id: number) {
+    this.idJobApply = id;
   }
-  saveApply(){
+
+  saveApply() {
     let idLogin = this.loginService.getUserToken().id;
-       let jobApply={
-         appUser:{
-           id: idLogin,
-         },
-         postEnterprise:{
-           idPostEnterprise:this.idJobApply,
-         }
-       }
-       this.userService.saveApplyJob(jobApply).subscribe(()=>{
-         this.funcitonAleartConfirmApply();
-         this.listPostByOderPriority();
-         // this.findCvByIdUser();
-       })
+    let jobApply = {
+      appUser: {
+        id: idLogin,
+      },
+      postEnterprise: {
+        idPostEnterprise: this.idJobApply,
+      }
+    }
+    this.userService.saveApplyJob(jobApply).subscribe(() => {
+      this.funcitonAleartConfirmApply();
+      this.search(this.page);
+      // this.findCvByIdUser();
+    })
   }
-  funcitonAleartConfirmApply(){
+
+  funcitonAleartConfirmApply() {
     // @ts-ignore
-    document.getElementById("loading").style.display="block";
-    setTimeout(function (){
+    document.getElementById("loading").style.display = "block";
+    setTimeout(function () {
       // @ts-ignore
-      document.getElementById("loading").style.display="none";
+      document.getElementById("loading").style.display = "none";
       // @ts-ignore
-      document.getElementById("modalConfirmApply").style.display="block";
-      setTimeout(function (){
+      document.getElementById("modalConfirmApply").style.display = "block";
+      setTimeout(function () {
         // @ts-ignore
-        document.getElementById("modalConfirmApply").style.display="none";
+        document.getElementById("modalConfirmApply").style.display = "none";
 
-      },3500);
-    },4000)
+      }, 3500);
+    }, 4000)
 
   }
-  confirmSaveApplyJob(){
+
+  confirmSaveApplyJob() {
     let idPost = this.idJobApply;
     let idLogin = this.loginService.getUserToken().id;
-    this.userService.findCvByIdUser(idLogin).subscribe((data)=>{
-      if(data!=null){
-        this.userService.findUserApplyByIdAppUserAndIdPost(idLogin,idPost).subscribe((data)=>{
+    this.userService.findCvByIdUser(idLogin).subscribe((data) => {
+      if (data != null) {
+        this.userService.findUserApplyByIdAppUserAndIdPost(idLogin, idPost).subscribe((data) => {
           this.cvByIdAppUserAndIdPost = data;
-          if(this.cvByIdAppUserAndIdPost===null){
+          if (this.cvByIdAppUserAndIdPost === null) {
             this.saveApply();
-          }else {
+          } else {
             alert("Với CV ĐANG CÓ BẠN ĐÃ APPLY CÔNG VIỆC NÀY XIN THAY ĐỔI CV");
           }
         })
-      }else {
-              this.functionAleatConfirmNotCV()
+      } else {
+        this.functionAleatConfirmNotCV()
       }
     })
   }
-  searchForm=new FormGroup({
+
+  searchForm = new FormGroup({
     nameEnterprise: new FormControl(""),
     address: new FormControl(""),
     idField: new FormControl(""),
     idFormJob: new FormControl("")
   })
 
-  search() {
+  search(page:any) {
     let search = this.searchForm.value;
 
     // Build param
     let searchParam = '';
-    if (search.address == "" && this.searchForm.value.idField == "" &&
-      this.searchForm.value.idFormJob == "" && this.searchForm.value.nameEnterprise == ""){
-      location.reload();
-    }
-    if (search.address != "" || this.searchForm.value.idField != "" ||
-      this.searchForm.value.idFormJob != "" || this.searchForm.value.nameEnterprise != "") {
-      searchParam += '?';
 
-      if (search.address != "") {
-        searchParam += 'address=' + search.address + "&";
-      }
-
-      if (search.idFormJob != "") {
-        searchParam += 'id-form-job=' + search.idFormJob + "&";
-      }
-
-      if (search.idField != "") {
-        searchParam += 'id-field=' + search.idField + "&";
-      }
-
-      if (search.nameEnterprise != "") {
-        searchParam += 'name-enterprise=' + search.nameEnterprise + "&";
-      }
-
-      searchParam.substring(0, searchParam.length - 1);
+    if (search.address != "") {
+      searchParam += '&address=' + search.address;
     }
 
-    this.userService.findEverything(searchParam).subscribe((data) => {
+    if (search.idFormJob != "") {
+      searchParam += '&id-form-job=' + search.idFormJob;
+    }
+
+    if (search.idField != "") {
+      searchParam += '&id-field=' + search.idField;
+    }
+
+    if (search.nameEnterprise != "") {
+      searchParam += '&name-enterprise=' + search.nameEnterprise;
+    }
+
+    if (page != "" && page != -1) {
+      searchParam += '&page=' + page;
+    }
+
+    this.userService.findEverything(searchParam, this.loginService.getUserToken().id).subscribe((data) => {
       this.postEnterpriseOffer = data;
       console.log(this.postEnterpriseOffer)
-      if(this.postEnterpriseOffer.length===0){
+      if (this.postEnterpriseOffer.length === 0) {
         // @ts-ignore
         document.getElementById('NOData').style.display = "block";
-      }else {
+      } else {
         // @ts-ignore
         document.getElementById('NOData').style.display = "none";
       }
@@ -341,37 +353,41 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  deltalComponent(){
-       this.router.navigate(["/user/deltal"])
+  deltalComponent() {
+    this.router.navigate(["/user/deltal"])
   }
+
   //  XÓA BÀI ĐĂNG khi hết hạn
-  deletePostExpired(){
-    this.userService.deletePostExpired().subscribe(()=>{
+  deletePostExpired() {
+    this.userService.deletePostExpired().subscribe(() => {
     })
   }
+
   indexPaginationChage(value: any) {
     // this.indexPagination = value;
     console.log("value")
     console.log("value")
     console.log(value)
   }
-  functionAleartConfirmSaveCv(){
+
+  functionAleartConfirmSaveCv() {
     // @ts-ignore
-    document.getElementById("modalConfirmSaveCV").style.display="block";
-      setTimeout(function (){
-        // @ts-ignore
-        document.getElementById("modalConfirmSaveCV").style.display="none";
-        // @ts-ignore
-      },3000)
+    document.getElementById("modalConfirmSaveCV").style.display = "block";
+    setTimeout(function () {
+      // @ts-ignore
+      document.getElementById("modalConfirmSaveCV").style.display = "none";
+      // @ts-ignore
+    }, 3000)
   }
-  functionAleatConfirmNotCV(){
+
+  functionAleatConfirmNotCV() {
     // @ts-ignore
-    document.getElementById("modalConfirmNotifiNotCv").style.display="block";
-    setTimeout(function (){
+    document.getElementById("modalConfirmNotifiNotCv").style.display = "block";
+    setTimeout(function () {
       // @ts-ignore
-      document.getElementById("modalConfirmNotifiNotCv").style.display="none";
+      document.getElementById("modalConfirmNotifiNotCv").style.display = "none";
       // @ts-ignore
-    },3000)
+    }, 3000)
   }
 
 }

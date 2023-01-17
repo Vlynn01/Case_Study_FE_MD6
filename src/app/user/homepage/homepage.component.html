@@ -158,6 +158,13 @@
               <li data-toggle="modal" data-target="#CreateCv" style="cursor: pointer" class="left"><a><i
                 class="ti-pencil-alt"></i>Tạo CV</a></li>
               <li class="right"><a style="cursor: pointer" (click)="logout()"><i class="ti-lock"></i>Đăng xuất</a></li>
+
+<!--              nguyen sua -->
+              <li class ="right"><a style="cursor: pointer" class="ti-user">{{userName}}</a>
+              </li>
+
+
+
             </ul>
           </div>
         </div>
@@ -244,12 +251,12 @@
             <h1>Kết nối ứng viên và doanh nghiệp hiệu quả</h1><br>
             <h2>Với hơn <strong>12,000</strong> công việc phù hợp và <strong>50,000</strong> ứng viên!</h2>
             <div class="content">
-              <form [formGroup]="searchForm" (ngSubmit)="search()">
+              <form [formGroup]="searchForm" (ngSubmit)="search(-1)">
                 <div class="row">
                   <div class="col-md-2.1 col-sm-6">
                     <div class="form-group">
                       <input class="form-control" formControlName="nameEnterprise" type="text"
-                             placeholder="Tên công việc">
+                             placeholder="Tên công ty">
                       <i class="ti-time"></i>
                     </div>
                   </div>

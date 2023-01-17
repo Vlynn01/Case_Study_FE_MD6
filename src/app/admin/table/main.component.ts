@@ -24,6 +24,7 @@ export class MainComponent implements OnInit{
   constructor(private adminService:AdminService,private router:Router,private enterpriseService:EnterpriseService,private loginService:LoginService) {
 
   }
+  userName = localStorage.getItem("username");
 
   ngOnInit(): void {
 
